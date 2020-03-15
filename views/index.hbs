@@ -70,31 +70,11 @@
 
     <!-- Chat Content Template -->
     <script id="chat-content-template" type="text/x-handlebars-template">
-       {{#each messages}}
-        <div class="event">
-          <div class="label">
-            <i class="icon blue user"></i>
-          </div>
-          <div class="content">
-            <div class="summary">
-              <a href="#"> {{ username }}</a> posted on
-              <div class="date">
-                {{ postedOn }}
-              </div>
-            </div>
-            <div class="extra text">
-              {{ message }}
-            </div>
-          </div>
-        </div>
-      {{/each}}
-
-
     </script>
 
     <!-- Chat Template -->
     <script id="chat-template" type="text/x-handlebars-template">
-        <h3 class="ui orange header">Room ID -> <strong>{{ room }}</strong></h3>
+        <h3 class="ui orange header">Room ID -> <strong> \{{room}}</strong></h3>
         <hr>
         <div id="chat-content" class="ui feed"> </div>
         <hr>

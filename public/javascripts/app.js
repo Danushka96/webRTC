@@ -1,7 +1,6 @@
 window.addEventListener('load', () => {
     // Chat platform
     const chatTemplate = Handlebars.compile($('#chat-template').html());
-    const chatContentTemplate = Handlebars.compile($('#chat-content-template').html());
     const chatEl = $('#chat');
     const formEl = $('.form');
     const messages = [];
@@ -29,7 +28,7 @@ window.addEventListener('load', () => {
 
     // create our webrtc connection
     const webrtc = new SimpleWebRTC({
-        url: "localhost:8888",
+        url: "192.168.1.4:8888",
         // the id/element dom element that will hold "our" video
         localVideoEl: 'local-video',
         // the id/element dom element that will hold remote videos
@@ -70,9 +69,29 @@ window.addEventListener('load', () => {
 
     // Update Chat Messages
     const updateChatMessages = () => {
-        const html = chatContentTemplate({ messages });
+        console.log(messages);
         const chatContentEl = $('#chat-content');
-        chatContentEl.html(html);
+        // console.log(html)
+        // console.log(chatContentEl)
+        let newMessage = messages[messages.length-1];
+        let messageContent = `<div class="event">
+          <div class="label">
+            <i class="icon blue user"></i>
+          </div>
+          <div class="content">
+            <div class="summary">
+              <a href="#"> ${newMessage.username}</a> posted on
+              <div class="date">
+                ${newMessage.postedOn}
+              </div>
+            </div>
+            <div class="extra text">
+              ${newMessage.message}
+            </div>
+          </div>
+        </div>`;
+
+        chatContentEl.append(messageContent);
         // automatically scroll downwards
         const scrollHeight = chatContentEl.prop('scrollHeight');
         chatContentEl.animate({ scrollTop: scrollHeight }, 'slow');
@@ -96,7 +115,8 @@ window.addEventListener('load', () => {
     // Display Chat Interface
     const showChatRoom = (room) => {
         formEl.hide();
-        const html = chatTemplate({ room });
+        console.log("Room" + room)
+        const html = chatTemplate({"room":room});
         chatEl.html(html);
         const postForm = $('form');
         postForm.form({

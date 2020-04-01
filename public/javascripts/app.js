@@ -28,7 +28,7 @@ window.addEventListener('load', () => {
 
     // create our webrtc connection
     const webrtc = new SimpleWebRTC({
-        url: "localhost:8888",
+        url: "18.141.147.43:8888",
         // the id/element dom element that will hold "our" video
         localVideoEl: 'local-video',
         // the id/element dom element that will hold remote videos
